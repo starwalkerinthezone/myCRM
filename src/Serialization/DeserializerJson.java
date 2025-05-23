@@ -30,23 +30,19 @@ public class DeserializerJson {
         File pos = new File(posPath);
         ObjectMapper mapper = new ObjectMapper();
         if (emp.length() > 3) {  // Больше, чем "{ }"
-            System.out.println("done");
             employeeMap = mapper.readValue(new File(employeePath), new TypeReference<HashMap<String, Employee>>(){});
             EmployeeManager.setIdToEmployee(employeeMap);
         }
         if (cus.length() > 3) {
-            System.out.println("done");
             customerMap = mapper.readValue(new File(customerPath), new TypeReference<HashMap<String, Customer>>() {
             });
             CustomerManager.setIdToCustomer(customerMap);
         }
         if (wh.length() > 3) {
-            System.out.println("done");
             warehouseMap = mapper.readValue(new File(warehousePath), new TypeReference<HashMap<String, Warehouse>>(){});
         }
 
         if (pos.length() > 3){
-            System.out.println("done");
             posMap = mapper.readValue(new File(posPath), new TypeReference<HashMap<String, PointOfSale>>() {});
         }
         for(String key : warehouseMap.keySet()){

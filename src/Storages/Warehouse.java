@@ -13,7 +13,7 @@ public class Warehouse implements Storage {
     private  Map<String, Product> cellIdToProduct;
     private  Map<String, WarehouseCell> idToWarehouseCell;
     private  Map<String, Product> idToProduct;
-    private  Map<String, WarehouseCell> productIdToCell;
+    private  Map<String, WarehouseCell> productIdToCell; //доделать чтобы сохранялся в json
     private  Map<String, List<String>> positionToEmployee;
     private String address;
     private int income;
@@ -193,12 +193,28 @@ public class Warehouse implements Storage {
         this.idToProduct = idToProduct;
     }
 
-    public void setProductToCell(Map<String, WarehouseCell> productToCell) {
+    public void setProductIdToCell(Map<String, WarehouseCell> productToCell) {
         this.productIdToCell = productToCell;
     }
 
     public void setPositionToEmployee(Map<String, List<String>> positionToEmployee) {
         this.positionToEmployee = positionToEmployee;
+    }
+
+    public Map<String, Product> getCellIdToProduct() {
+        return cellIdToProduct;
+    }
+
+    public Map<String, WarehouseCell> getProductIdToCell() {
+        return productIdToCell;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setCellIdToProduct(Map<String, Product> cellIdToProduct) {
+        this.cellIdToProduct = cellIdToProduct;
     }
 
     public static class WarehouseCell{

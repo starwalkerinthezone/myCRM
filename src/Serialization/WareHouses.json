@@ -1,10 +1,83 @@
 {
-  "c7c4b74e-5ada-40d4-bdb1-d71caf02c9e6" : {
-    "id" : "c7c4b74e-5ada-40d4-bdb1-d71caf02c9e6",
-    "idToWarehouseCell" : { },
-    "idToProduct" : { },
+  "d71e7e7b-e1c5-478d-a31c-33bfe0383090" : {
+    "id" : "d71e7e7b-e1c5-478d-a31c-33bfe0383090",
+    "cellIdToProduct" : {
+      "dffl" : {
+        "id" : "5e9033a7-3962-4944-9d9c-1f915bf4c891",
+        "price" : 2,
+        "name" : "fk",
+        "amount" : 2
+      }
+    },
+    "idToWarehouseCell" : {
+      "dffl" : {
+        "id" : "dffl"
+      }
+    },
+    "idToProduct" : {
+      "5e9033a7-3962-4944-9d9c-1f915bf4c891" : {
+        "id" : "5e9033a7-3962-4944-9d9c-1f915bf4c891",
+        "price" : 2,
+        "name" : "fk",
+        "amount" : 2
+      }
+    },
+    "productIdToCell" : {
+      "5e9033a7-3962-4944-9d9c-1f915bf4c891" : {
+        "id" : "dffl"
+      }
+    },
     "positionToEmployee" : { },
-    "address" : "dfgmfd",
-    "income" : 0
+    "address" : "f,f",
+    "income" : 0,
+    "type" : "wh"
+  },
+  "9ec8eb0a-6740-4c84-852c-c70d690f1680" : {
+    "id" : "9ec8eb0a-6740-4c84-852c-c70d690f1680",
+    "cellIdToProduct" : {
+      "F-1" : null
+    },
+    "idToWarehouseCell" : {
+      "F-1" : {
+        "id" : "F-1"
+      }
+    },
+    "idToProduct" : {
+      "4bc1a910-5bbe-4c68-b6ff-2c19dfe6859c" : {
+        "id" : "4bc1a910-5bbe-4c68-b6ff-2c19dfe6859c",
+        "price" : 2,
+        "name" : "drto",
+        "amount" : 2
+      }
+    },
+    "productIdToCell" : { },
+    "positionToEmployee" : { },
+    "address" : "dfghy",
+    "income" : 2,
+    "type" : "wh"
+  },
+  "839608c3-af56-4468-87b5-9ff2686bd571" : {
+    "id" : "839608c3-af56-4468-87b5-9ff2686bd571",
+    "cellIdToProduct" : {
+      "wdfb" : null
+    },
+    "idToWarehouseCell" : {
+      "wdfb" : {
+        "id" : "wdfb"
+      }
+    },
+    "idToProduct" : {
+      "73b89e1e-8769-46cc-b7d1-c5900428dbc6" : {
+        "id" : "73b89e1e-8769-46cc-b7d1-c5900428dbc6",
+        "price" : 2,
+        "name" : "ghgbg",
+        "amount" : 2
+      }
+    },
+    "productIdToCell" : { },
+    "positionToEmployee" : { },
+    "address" : "smhkth",
+    "income" : 0,
+    "type" : "wh"
   }
 }

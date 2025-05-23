@@ -3,11 +3,11 @@ package Products;
 import java.util.UUID;
 
 public class Product {
-    private final String id;
+    private  String id;
 
-    private final int price;
+    private  int price;
 
-    private final String name;
+    private  String name;
 
     private static int counter;
 
@@ -19,6 +19,7 @@ public class Product {
         this.price = price;
         this.amount = amount;
     }
+    public Product(){}
     public static Product newProduct(String nameOfProduct, int priceOfProduct, int amountOfProduct){
         return new Product(nameOfProduct, priceOfProduct, amountOfProduct);
     }
@@ -41,5 +42,21 @@ public class Product {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public static void setCounter(int counter) {
+        Product.counter = counter;
     }
 }

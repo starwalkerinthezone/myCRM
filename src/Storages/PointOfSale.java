@@ -48,7 +48,7 @@ public class PointOfSale implements Storage {
     //продать товар
     public int sellProduct(String id){
         Product fromProduct = idToProduct.get(id);
-        System.out.println("введите количество(доступно " + ")") ;
+        System.out.println("введите количество(доступно " + fromProduct.getAmount() + ")") ;
         int amount;
         while(true) {
             amount = scanner.nextInt();
@@ -133,5 +133,21 @@ public class PointOfSale implements Storage {
 
     public void setPositionToEmployee(Map<String, List<String>> positionToEmployee) {
         this.positionToEmployee = positionToEmployee;
+    }
+
+    public Map<String, String> getProductIdToWarehouseId() {
+        return productIdToWarehouseId;
+    }
+
+    public Map<String, String> getProductToIdWarehouseCellId() {
+        return productToIdWarehouseCellId;
+    }
+
+    public void setProductIdToWarehouseId(Map<String, String> productIdToWarehouseId) {
+        this.productIdToWarehouseId = productIdToWarehouseId;
+    }
+
+    public void setProductToIdWarehouseCellId(Map<String, String> productToIdWarehouseCellId) {
+        this.productToIdWarehouseCellId = productToIdWarehouseCellId;
     }
 }

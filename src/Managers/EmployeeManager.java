@@ -16,9 +16,11 @@ public class EmployeeManager {
             List<String> employees = new ArrayList<>();
             employees.add(employeeID);
             storage.getPositionToEmployee().put(position, employees);
+
         }
         else{
             storage.getPositionToEmployee().get(position).add(employeeID);
+
         }
         idToEmployee.put(employeeID, newEmployee);
 
@@ -27,7 +29,14 @@ public class EmployeeManager {
     public static void changePosition(Employee employee, Storage fromStorage, Storage toStorage, String position){
         fromStorage.getPositionToEmployee().get(employee.getPosition()).remove(employee.getId());
         employee.setPosition(position);
-        toStorage.getPositionToEmployee().get(employee.getPosition()).add(employee.getId());
+        Map<String, List<String>> positionToEmployee = toStorage.getPositionToEmployee();
+        List<String> employees = positionToEmployee.get(employee.getPosition());
+        if (employees == null){
+            employees = new ArrayList<>();
+        }
+        employees.add(employee.getId());
+        positionToEmployee.put(employee.getPosition(), employees);
+
 
     }
     //уволить сотрудника
@@ -42,6 +51,7 @@ public class EmployeeManager {
 
     }
     //определить список работников
+
     public static void setIdToEmployee(Map<String, Employee> idToEmployee) {
         EmployeeManager.idToEmployee = idToEmployee;
     }

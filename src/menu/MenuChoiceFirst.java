@@ -1,19 +1,26 @@
 package menu;
 
+import Managers.CustomerManager;
+import Managers.EmployeeManager;
 import Managers.StorageManager;
 import Products.Product;
+import Serialization.DeserializerJson;
+import Serialization.JsonNames;
+import Serialization.SerializerJson;
 import Storages.PointOfSale;
 import Storages.Warehouse;
 import Tools.ChoiceFrom;
 import Tools.Counters;
 import Tools.FailIn;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class MenuChoiceFirst {
     private final Scanner scanner = new Scanner(System.in);
+    private final DeserializerJson deserializerJson = new DeserializerJson();
     //первый выбор в меню
      public void menuChoice1(){
         while(true) {
@@ -45,12 +52,16 @@ public class MenuChoiceFirst {
                 //выборы в подменю
                 //открыть склад
                 if (choice == 1){
+                    deserializerJson.deserialize(JsonNames.employees, JsonNames.customers, JsonNames.warehouse, JsonNames.pos);
                     System.out.println("Введите адрес склада:");
                     String address = scanner.nextLine().trim();
                     StorageManager.addStorage(new Warehouse(address));
+                    SerializerJson.serialize(EmployeeManager.getIdToEmployee(),
+                            StorageManager.getIdToStorage(), CustomerManager.getIdToCustomer());
                 }
                 //закрыть склад
                 if(choice == 2){
+                    deserializerJson.deserialize(JsonNames.employees, JsonNames.customers, JsonNames.warehouse, JsonNames.pos);
                     System.out.println("Выберите какой склад закрыть:");
                     List<Warehouse> warehouseList = Counters.warehouseCounter();
                     if (warehouseList.isEmpty()){
@@ -71,9 +82,12 @@ public class MenuChoiceFirst {
                             System.out.println("неверная команда");
                         }
                     }
+                    SerializerJson.serialize(EmployeeManager.getIdToEmployee(),
+                            StorageManager.getIdToStorage(), CustomerManager.getIdToCustomer());
                 }
                 //инфо о складе
                 if (choice == 3){
+                    deserializerJson.deserialize(JsonNames.employees, JsonNames.customers, JsonNames.warehouse, JsonNames.pos);
                     List<Warehouse> warehouseList = Counters.warehouseCounter();
                     if (warehouseList.isEmpty()){
                         System.out.println("нет складов");
@@ -97,9 +111,12 @@ public class MenuChoiceFirst {
                             System.out.println("неверная команда");
                         }
                     }
+                    SerializerJson.serialize(EmployeeManager.getIdToEmployee(),
+                            StorageManager.getIdToStorage(), CustomerManager.getIdToCustomer());
                 }
                 //инфо о товарах на складе
                 if (choice == 4){
+                    deserializerJson.deserialize(JsonNames.employees, JsonNames.customers, JsonNames.warehouse, JsonNames.pos);
                     List<Warehouse> warehouseList = Counters.warehouseCounter();
                     if (warehouseList.isEmpty()){
                         System.out.println("нет складов");
@@ -114,15 +131,19 @@ public class MenuChoiceFirst {
                                 continue;
                             }
                             StorageManager.getStorage(warehouseList.get(choiceToClose-1).getId()).aboutProducts();
+
                             break;
                         } catch (RuntimeException e) {
-                            System.out.println("неверная команда");
+                            e.printStackTrace();
 
                         }
                     }
+                    SerializerJson.serialize(EmployeeManager.getIdToEmployee(),
+                            StorageManager.getIdToStorage(), CustomerManager.getIdToCustomer());
                 }
                 //перемещение товара по складу
                 if (choice == 5){
+                    deserializerJson.deserialize(JsonNames.employees, JsonNames.customers, JsonNames.warehouse, JsonNames.pos);
                     System.out.println("Выберите товар и ячейку");
                     List<Warehouse> warehouseList = Counters.warehouseCounter();
                     if (warehouseList.isEmpty()){
@@ -145,6 +166,10 @@ public class MenuChoiceFirst {
                                 System.out.println(++counter + " - " + product.getName());
                                 products.add(product);
                             }
+                            if (products.isEmpty()){
+                                System.out.println("нет продуктов");
+                                return;
+                            }
                             int choiceProd;
                             while(true) {
                                 choiceable = scanner.nextLine();
@@ -160,6 +185,10 @@ public class MenuChoiceFirst {
                             for(Warehouse.WarehouseCell warehouseCell : warehouse.getIdToWarehouseCell().values()){
                                 System.out.println(++counter1 + " - " + warehouseCell.getId());
                                 warehouseCells.add(warehouseCell);
+                            }
+                            if (warehouseCells.isEmpty()){
+                                System.out.println("нет ячеек");
+                                return;
                             }
                             int choiceCell;
                             while(true) {
@@ -178,9 +207,12 @@ public class MenuChoiceFirst {
                             System.out.println("неверная команда");
                         }
                     }
+                    SerializerJson.serialize(EmployeeManager.getIdToEmployee(),
+                            StorageManager.getIdToStorage(), CustomerManager.getIdToCustomer());
                 }
                 //перемещение товара на пункт продаж
                 if (choice == 6){
+                    deserializerJson.deserialize(JsonNames.employees, JsonNames.customers, JsonNames.warehouse, JsonNames.pos);
                     System.out.println("Выберите склад, товар и пункт продаж");
                     List<Warehouse> warehouseList = Counters.warehouseCounter();
                     if (warehouseList.isEmpty()){
@@ -227,6 +259,8 @@ public class MenuChoiceFirst {
                     }
                     Warehouse neededWarehouse = (Warehouse) StorageManager.getIdToStorage().get(warehouse.getId());
                     neededWarehouse.moveProductToPointSale(products.get(choiceProd-1).getId(), poses.get(choicePos-1).getId());
+                    SerializerJson.serialize(EmployeeManager.getIdToEmployee(),
+                            StorageManager.getIdToStorage(), CustomerManager.getIdToCustomer());
                 }
                 //выйти
                 if(choice == 7){
@@ -234,6 +268,7 @@ public class MenuChoiceFirst {
                 }
                 //узнать доходность
                 if(choice==8){
+                    deserializerJson.deserialize(JsonNames.employees, JsonNames.customers, JsonNames.warehouse, JsonNames.pos);
                     List<Warehouse> warehouseList = Counters.warehouseCounter();
                     if (warehouseList.isEmpty()){
                         System.out.println("нет складов");
@@ -241,9 +276,12 @@ public class MenuChoiceFirst {
                     }
                     Warehouse warehouse = warehouseList.get(ChoiceFrom.choiceFromList(warehouseList)-1);
                     System.out.println(warehouse.getIncome());
+                    SerializerJson.serialize(EmployeeManager.getIdToEmployee(),
+                            StorageManager.getIdToStorage(), CustomerManager.getIdToCustomer());
                 }
                 //закупка продукта
                 if(choice == 9){
+                    deserializerJson.deserialize(JsonNames.employees, JsonNames.customers, JsonNames.warehouse, JsonNames.pos);
                     System.out.println("Введите имя продукта");
                     String productName = scanner.nextLine().trim();
                     System.out.println("Введите цену продукта");
@@ -256,9 +294,6 @@ public class MenuChoiceFirst {
                         FailIn.failIn();
                         break;
                     }
-
-
-                    scanner.nextLine();
                     System.out.println("Введите кол-во продукта");
                     int productAmount;
                     if (scanner.hasNextInt()){
@@ -286,12 +321,16 @@ public class MenuChoiceFirst {
                     Product newProduct = Product.newProduct(productName, productPrice, productAmount);
                     List<Warehouse.WarehouseCell> warehouseCells = new ArrayList<>();
                     int counterCell = 0;
-                    System.out.println("Выберите ячейку");
+
                     for (Warehouse.WarehouseCell Cell : warehouse.getIdToWarehouseCell().values()) {
                         System.out.println(++counterCell + " - " + Cell.getId());
                         warehouseCells.add(Cell);
-
                     }
+                    if (warehouseCells.isEmpty()){
+                        System.out.println("нет ячеек");
+                        return;
+                    }
+                    System.out.println("Выберите ячейку");
                     int choiceCell;
                     while (true){
                         choiceable = scanner.nextLine();
@@ -304,9 +343,13 @@ public class MenuChoiceFirst {
                         break;
                     }
                     warehouse.purchaseProduct(newProduct, warehouseCells.get(choiceCell-1).getId());
+                    SerializerJson.serialize(EmployeeManager.getIdToEmployee(),
+                            StorageManager.getIdToStorage(), CustomerManager.getIdToCustomer());
                 }
                 //создать ячейку склада
+
                 if (choice == 10){
+                    deserializerJson.deserialize(JsonNames.employees, JsonNames.customers, JsonNames.warehouse, JsonNames.pos);
                     System.out.println("в каком складе?");
                     List<Warehouse> warehouseList = Counters.warehouseCounter();
                     if (warehouseList.isEmpty()){
@@ -317,9 +360,13 @@ public class MenuChoiceFirst {
                     System.out.println("Введите наименование ячейки");
                     String name = scanner.nextLine().trim();
                     warehouse.addWarehouseCell(name);
+                    SerializerJson.serialize(EmployeeManager.getIdToEmployee(),
+                            StorageManager.getIdToStorage(), CustomerManager.getIdToCustomer());
                 }
             } catch (RuntimeException e) {
                 System.out.println("неверная команда");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
     }

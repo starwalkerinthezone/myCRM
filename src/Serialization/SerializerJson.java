@@ -36,6 +36,7 @@ public class SerializerJson {
                 idToPoints.put(key, (PointOfSale) storage);
             }
         }
+
         mapper.writerWithDefaultPrettyPrinter().writeValue(Warehouses, idToWareHouse);
         mapper.writerWithDefaultPrettyPrinter().writeValue(PointOfSales, idToPoints);
 

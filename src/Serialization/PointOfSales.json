@@ -1,1 +1,42 @@
-{ }
+{
+  "e2ef5c41-ba95-434c-8d7d-d3b7605056ef" : {
+    "idToProduct" : {
+      "4bc1a910-5bbe-4c68-b6ff-2c19dfe6859c" : {
+        "id" : "4bc1a910-5bbe-4c68-b6ff-2c19dfe6859c",
+        "price" : 2,
+        "name" : "drto",
+        "amount" : 1
+      }
+    },
+    "productIdToWarehouseId" : {
+      "4bc1a910-5bbe-4c68-b6ff-2c19dfe6859c" : "9ec8eb0a-6740-4c84-852c-c70d690f1680"
+    },
+    "productToIdWarehouseCellId" : {
+      "4bc1a910-5bbe-4c68-b6ff-2c19dfe6859c" : "F-1"
+    },
+    "id" : "e2ef5c41-ba95-434c-8d7d-d3b7605056ef",
+    "address" : "rktrmv",
+    "income" : 2,
+    "positionToEmployee" : { }
+  },
+  "ca03efc6-5a4d-4ce3-ab25-4729a937e8bf" : {
+    "idToProduct" : {
+      "73b89e1e-8769-46cc-b7d1-c5900428dbc6" : {
+        "id" : "73b89e1e-8769-46cc-b7d1-c5900428dbc6",
+        "price" : 2,
+        "name" : "ghgbg",
+        "amount" : 2
+      }
+    },
+    "productIdToWarehouseId" : {
+      "73b89e1e-8769-46cc-b7d1-c5900428dbc6" : "839608c3-af56-4468-87b5-9ff2686bd571"
+    },
+    "productToIdWarehouseCellId" : {
+      "73b89e1e-8769-46cc-b7d1-c5900428dbc6" : "wdfb"
+    },
+    "id" : "ca03efc6-5a4d-4ce3-ab25-4729a937e8bf",
+    "address" : "cnhghjm",
+    "income" : 0,
+    "positionToEmployee" : { }
+  }
+}

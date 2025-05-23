@@ -1,10 +1,11 @@
 import menu.*;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //цикл работы программы
         while (true){
             Menu menu = new Menu();
@@ -18,20 +19,11 @@ public class Main {
                 menuChoiceSecond.menuChoice2();
             }
             else if (choice == 3){
-                MenuChoiceThird menuChoiceThird = new MenuChoiceThird();
-                menuChoiceThird.menuChoice3();
-            }
-
-            else if(choice == 4){
                 MenuChoice4 menuChoice4 = new MenuChoice4();
                 menuChoice4.menuChoice4();
             }
 
-            else if(choice == 5){
-                MenuChoice5 menuChoice5 = new MenuChoice5();
-                menuChoice5.menuChoice5();
-            }
-            else if(choice == 6){
+            else if(choice == 4){
                 System.exit(0);
             }
         }

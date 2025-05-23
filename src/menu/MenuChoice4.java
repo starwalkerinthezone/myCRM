@@ -1,9 +1,13 @@
 package menu;
 
+import Managers.CustomerManager;
 import Managers.EmployeeManager;
 import Managers.StorageManager;
 import PositionEnums.PointOfSalePositions;
 import PositionEnums.WareHousePositions;
+import Serialization.DeserializerJson;
+import Serialization.JsonNames;
+import Serialization.SerializerJson;
 import Storages.PointOfSale;
 import Storages.Storage;
 import Storages.Warehouse;
@@ -11,15 +15,16 @@ import Tools.ChoiceFrom;
 import Tools.Counters;
 import Employee.Employee;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 public class MenuChoice4 {
     private final Scanner scanner = new Scanner(System.in);
-
+    private final DeserializerJson deserializerJson = new DeserializerJson();
 
 
     //выбор меню 4
-     public void menuChoice4() {
+     public void menuChoice4() throws IOException {
         while (true) {
             System.out.println("1 - найм сотрудника");
             System.out.println("2 - уволить сотрудника");
@@ -43,6 +48,7 @@ public class MenuChoice4 {
             }
             //найм сотрудника
             if (choice == 1) {
+                deserializerJson.deserialize(JsonNames.employees, JsonNames.customers, JsonNames.warehouse, JsonNames.pos);
                 System.out.println("введите имя");
                 String name = scanner.nextLine().trim();
                 System.out.println("введите фамилию");
@@ -81,18 +87,22 @@ public class MenuChoice4 {
                 String position = "";
                 if (storage instanceof PointOfSale) {
                     List<PointOfSalePositions> pointOfSalePositions = Counters.posPositionCounter();
-                    position = pointOfSalePositions.get(ChoiceFrom.choiceFromList(pointOfSalePositions)).getPosition();
+                    position = pointOfSalePositions.get(ChoiceFrom.choiceFromList(pointOfSalePositions)-1).getPosition();
+
 
                 }
                 if (storage instanceof Warehouse) {
                     List<WareHousePositions> WarehousePos = Counters.WareHousePositionCounter();
-                    position = WarehousePos.get(ChoiceFrom.choiceFromList(WarehousePos)).getPosition();
+                    position = WarehousePos.get(ChoiceFrom.choiceFromList(WarehousePos)-1).getPosition();
                 }
                 EmployeeManager.addEmployee(name, lastname, position, storage);
                 System.out.println("добавлен сотрудник");
+                SerializerJson.serialize(EmployeeManager.getIdToEmployee(),
+                        StorageManager.getIdToStorage(), CustomerManager.getIdToCustomer());
             }
             //увольнение сотрудника
             if (choice == 2){
+                deserializerJson.deserialize(JsonNames.employees, JsonNames.customers, JsonNames.warehouse, JsonNames.pos);
                 List<Employee> employees = Counters.empCounter();
                 if(employees.isEmpty()){
                     System.out.println("нет работников");
@@ -101,9 +111,12 @@ public class MenuChoice4 {
                 Employee employee = employees.get(ChoiceFrom.choiceFromList(employees)-1);
                 Storage fromStorage = StorageManager.getStorage(employee.getLocation());
                 EmployeeManager.deleteEmployeePos(employee, fromStorage);
+                SerializerJson.serialize(EmployeeManager.getIdToEmployee(),
+                        StorageManager.getIdToStorage(), CustomerManager.getIdToCustomer());
             }
             //смена ответственного лица
             if(choice == 3){
+                deserializerJson.deserialize(JsonNames.employees, JsonNames.customers, JsonNames.warehouse, JsonNames.pos);
                 List<Employee> employees = Counters.empCounter();
                 if(employees.isEmpty()){
                     System.out.println("нет работников");
@@ -129,7 +142,7 @@ public class MenuChoice4 {
                         System.out.println("нет складов");
                         return;
                     }
-                    storage = warehouseList.get(ChoiceFrom.choiceFromList(warehouseList));
+                    storage = warehouseList.get(ChoiceFrom.choiceFromList(warehouseList)-1);
 
                 }
                 if (choiceStore == 1) {
@@ -143,14 +156,16 @@ public class MenuChoice4 {
                 String position = "";
                 if (storage instanceof PointOfSale) {
                     List<PointOfSalePositions> pointOfSalePositions = Counters.posPositionCounter();
-                    position = pointOfSalePositions.get(ChoiceFrom.choiceFromList(pointOfSalePositions)).getPosition();
+                    position = pointOfSalePositions.get(ChoiceFrom.choiceFromList(pointOfSalePositions)-1).getPosition();
 
                 }
                 if (storage instanceof Warehouse) {
                     List<WareHousePositions> WarehousePos = Counters.WareHousePositionCounter();
-                    position = WarehousePos.get(ChoiceFrom.choiceFromList(WarehousePos)).getPosition();
+                    position = WarehousePos.get(ChoiceFrom.choiceFromList(WarehousePos)-1).getPosition();
                 }
                 EmployeeManager.changePosition(employee, fromStorage, storage, position);
+                SerializerJson.serialize(EmployeeManager.getIdToEmployee(),
+                        StorageManager.getIdToStorage(), CustomerManager.getIdToCustomer());
             }
             //назад
             if(choice == 4){

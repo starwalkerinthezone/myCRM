@@ -7,7 +7,7 @@ import Storages.PointOfSale;
 import java.util.*;
 
 public class Customer {
-    private HashMap<String, List<HashMap<String, Integer>>> PosToProdBought;
+    private HashMap<String, List<HashMap<String, Integer>>> PosToProdBought = new HashMap<>();
     private  String id = UUID.randomUUID().toString();
     private  String name;
 
